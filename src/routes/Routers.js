@@ -7,6 +7,7 @@ import PizzaDetails from "../pages/PizzaDetails";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Cliente from "../pages/Cliente";
+import Sobre from "../pages/Sobre";
 
 const Routers = () => {
   return (
@@ -17,6 +18,7 @@ const Routers = () => {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/cardapio/:id" element={<PizzaDetails />} />
       <Route path="/cliente" element={<Cliente />} />
+      <Route path="/sobre" element={<Sobre />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

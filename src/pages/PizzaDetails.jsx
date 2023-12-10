@@ -36,7 +36,7 @@ const PizzaDetails = () => {
   const product = products.find((product) => product.id === id);
   const cartProducts = useSelector((state) => state.cart.cartItems);
   const [previewImg, setPreviewImg] = useState(product.image01);
-  const { title, price, category, desc, image01 } = product;
+  const { title, price, category, desc } = product;
   const relatedProduct = products.filter((item) => category === item.category);
 
   useEffect(() => {
@@ -59,7 +59,6 @@ const PizzaDetails = () => {
         id,
         title,
         price,
-        image01,
         extraIngredients,
       })
     );

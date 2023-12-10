@@ -39,29 +39,6 @@ const Cart = () => {
 
   const clienteInfo = localStorage.getItem("cliente");
 
-  const convertToJSON = () => {
-    /*
-  Padrão de envio dos pedidos para o backend em JSON:
- 
-*/
-
-    const cliente = JSON.parse(clienteInfo);
-    const pedido = {
-      pizzas: cartItems.map((item) => ({
-        id: item.id,
-        quantidade: item.quantity,
-      })),
-      total: totalAmount,
-    };
-
-    const json = {
-      cliente,
-      pedido,
-    };
-
-    return json;
-  }
-
   const finalizar = () => {
     if (cartItems.length === 0) {
       alert("Você ainda não adicionou produtos");
@@ -70,28 +47,39 @@ const Cart = () => {
     if (clienteInfo === null) {
       alert("Você ainda não preencheu as informações do cliente");
     }
+    const cliente = JSON.parse(clienteInfo);
+    const pedido = {
+      pizzas: cartItems.map((item) => {
+        return {
+          id: item.id,
+          quantidade: item.quantity,
+        };
+      }),
+      total: totalAmount,
+    };
 
-    const dados = convertToJSON()
-    // A conversão para JSON não está funcionando pois o clienteInfo está vindo como string
+    const data = {
+      cliente,
+      pedido,
+    };
+
     fetch("http://localhost:3001/", {
       method: "POST",
+      body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dados),
-      origin: "http://localhost:3001/",
+        "Content-Type": "application/json"
+      }
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
         alert("Pedido realizado com sucesso!");
-        localStorage.removeItem("cliente");
+       
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-
 
   return (
     <Helmet title="Carrinho">

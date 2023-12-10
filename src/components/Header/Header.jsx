@@ -97,7 +97,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* ======== nav right icons ========= */}
           <div className="nav__right d-flex align-items-center gap-4">
             <span className="cart__icon" onClick={toggleCart}>
               <i className="ri-shopping-basket-line"></i>
